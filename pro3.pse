@@ -1,0 +1,72 @@
+Algoritmo Bosque de Arboles - Sebastian Mata C.I:30.547.594
+Variables
+    Arista = clase de 
+        caracter 1
+        caracter 0
+    Fclase
+    arreglo[26] de caracteres vertices //conjunto de vertices del grafo
+    arreglo[26] de cadenas grafo// estructura que representa el bosque
+    entero aux, repetido, i, j, arboles, bellotas
+    logico agregado, pertenecen
+Inicio
+Si buscar_en_arreglo(vertices,Arista.0) Y buscar_en_arreglo(vertices,Arista.1)  entonces// si ambos vertices pertencen al grafo
+    aux <- num_elementos(grafo)//cuento cuantas posiciones del arreglo no estan vacias
+    Si aux = 0 entonces
+        grafo[1] <- Arista.0+Arista.1// si esta todo vacio entonces agrego a la primera posicion
+    Sino
+        agregado<-falso
+        repetido<-0
+        i<-1
+        Mientras i < aux hacer
+            Si pertenece(grafo[i], Arista.0) entonces// si el priimer vertice de la arista pertenece a un arbol
+                Si agreado = falso  entonces// y no se ha agregado ya en otro
+                    Si pertenece(grafo[i], Arista.1) = falso entonces// y la segunda arista no esta en ese arbol
+                        grafo[i]<-grafo[i]+ Arista.1// se agrega
+                        repetido <- i// se gurada la posicion del arreglo en la que se guardo
+                        agregado<- verdadero
+                    Sino//si no contiene el segundo vertice, se agrega, y si si lo tiene, significa que ya esta agregado
+                        agregado<- verdadero
+                    Fsi
+                Sino// si agregado es verdad, significa que hay otro arbol con el mismo vertice, por lo que se juntan
+                    grafo[repetido]<-grafo[repetido]+grafo[i]
+                    grafo[i]<- -1// logicamente borrado
+                    aux <- aux-1
+                Fsi
+            Sino
+                Si pertenece(grafo[i], Arista.1) entonces// si es el segundo vertice de la arista el que pertenece
+                    Si agreado = falso entonces// y no se han agregado ya
+                        grafo[i]<-grafo[i]+ Arista.0//pues se agrega la primera
+                        repetido <- i
+                        agregado <- verdad
+                    Sino
+                        grafo[repetido]<-grafo[repetido]+grafo[i]
+                        grafo[i]<- -1// logicamente borrado
+                        aux <- aux-1
+                    Fsi
+                Fsi
+            Fsi
+            i<- i+1
+        Fmientras
+        Si agregado = falso entonces
+         agregar_al_primer_vacio(grafo, Arista.0+Arista.1)
+        Fsi
+    Fsi
+Fsi
+arboles<- num_elementos(grafo)// la idea es que solo sean cadenas que representan arboles en el arreglo grafo
+bellotas<-0
+j<-1
+Para i = 1 hasta i = 26 hacer
+    pertenecen<- falso
+    Para j = 1 hasta j = arboles hacer
+        Si pertenece(grafo[j], vertices[i]) entonces
+            pertenecen <- verdad
+        Fsi
+        j<-j+1
+    Fpara
+    Si pertenecen = falso entonces
+        bellotas <- bellotas+1
+    Fsi
+    i<-i+1
+Fpara
+Escribir("Hay" arboles "árbol(es) y" bellotas "bellota(s)")
+Fin
