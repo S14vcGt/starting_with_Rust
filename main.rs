@@ -1,4 +1,4 @@
-// Algoritmo Bosque de Arboles - Sebastian Mata C.I:30.547.594
+// Algoritmo Bosque de Arboles
 use std::{
     fs::File,
     io::BufReader,
